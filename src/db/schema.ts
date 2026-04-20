@@ -24,7 +24,7 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
 
   // Added role column to support Admin functionality
-  role: varchar("role", { length: 20 }).default("user").notNull(),
+  role: text("role").default("user").notNull(), // Sets default at DB level
 
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),

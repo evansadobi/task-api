@@ -7,9 +7,10 @@ import { hashPassword, comparePasswords } from "../utils/password";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { email, name, age, password } = req.body;
+    const { email, name, age, password, role } = req.body;
 
     const hashedPassword = await hashPassword(password);
+    const userRole = role || "user";
 
     const [newUser] = await db
       .insert(users)
@@ -26,6 +27,7 @@ export const register = async (req: Request, res: Response) => {
       id: newUser.id,
       email: newUser.email,
       name: newUser.name,
+      age: newUser.age,
       role: newUser.role || "user",
     });
 
